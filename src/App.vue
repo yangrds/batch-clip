@@ -10,6 +10,7 @@ export default defineComponent({
 });
 </script>
 
+
 <style lang="scss">
 @import "./assets/css/ress.css";
 @import "./assets/css/public.scss";
