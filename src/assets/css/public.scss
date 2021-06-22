@@ -1,0 +1,25 @@
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+.file-name {
+    width: 100%;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    > span {
+        font-size: 16px;
+        margin-left: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

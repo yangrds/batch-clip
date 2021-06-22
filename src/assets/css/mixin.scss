@@ -1,0 +1,36 @@
+@mixin before($max) {
+    &::before {
+      width: 100%;
+      height: 1px;
+      display: block;
+      content: "";
+      background-color: rgba(0, 0, 0, 0.1);
+      transform: scaleY($max);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 9;
+    }
+  }
+  
+  @mixin TopBefore($max) {
+    &::before {
+      width: 100%;
+      height: 1px;
+      display: block;
+      content: "";
+      background-color: rgba(0, 0, 0, 0.1);
+      transform: scaleY($max);
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 9;
+    }
+  }
+  
+  @mixin omit($index) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $index;
+    overflow: hidden;
+  }
