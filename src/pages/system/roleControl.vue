@@ -1,8 +1,8 @@
 <!--
  * @Author: 杨荣代
  * @Date: 2021-06-22 14:32:49
- * @LastEditTime: 2021-06-22 16:25:00
- * @LastEditors: 杨荣代
+ * @LastEditTime: 2021-06-23 17:58:28
+ * @LastEditors: 随风
  * @Description: 
  * @FilePath: \free-cloud\src\pages\system\roleControl.vue
 -->
@@ -11,9 +11,21 @@
   <div class="roleControl">
     <el-table :data="roleData" :height="scrollH" style="width: 100%">
       <el-table-column type="selection" width="25"> </el-table-column>
-      <el-table-column prop="name" label="名称"> </el-table-column>
-      <el-table-column prop="name" label="权限"> </el-table-column>
-      <el-table-column prop="name" label="硬盘占用"> </el-table-column>
+      <el-table-column prop="title" label="名称" width="300px"> </el-table-column>
+      <el-table-column prop="title" label="权限">
+        <template #default="scope">
+          <el-tag
+          size="small"
+          type = 'warning'
+           effect="dark"
+            v-for="(item, key) in scope.row.permissions"
+            :key="key"
+            v-show="item"
+            style="margin-right: 10px"
+            >{{ permissionsName(key) }}</el-tag
+          >
+        </template>
+      </el-table-column>
     </el-table>
 
     <el-dialog
@@ -34,23 +46,23 @@
           <span>权限</span>
           <div class="model-check">
             <el-checkbox
-              v-model="roleState.jurisdiction.personal"
+              v-model="roleState.permissions.personal"
               label="个人空间"
             ></el-checkbox>
             <el-checkbox
-              v-model="roleState.jurisdiction.organization"
+              v-model="roleState.permissions.organization"
               label="公司空间"
             ></el-checkbox>
             <el-checkbox
-              v-model="roleState.jurisdiction.team"
+              v-model="roleState.permissions.team"
               label="部门空间"
             ></el-checkbox>
             <el-checkbox
-              v-model="roleState.jurisdiction.share"
+              v-model="roleState.permissions.share"
               label="文件分享"
             ></el-checkbox>
             <el-checkbox
-              v-model="roleState.jurisdiction.settings"
+              v-model="roleState.permissions.settings"
               label="系统设置"
             ></el-checkbox>
           </div>
@@ -68,7 +80,7 @@
 <script lang='ts'>
 import store from "@/store";
 import { computed, defineComponent, onMounted, reactive, ref } from "vue";
-import { addRoleInfo } from "../../server/api";
+import { addRoleInfo, roleList } from "../../server/api";
 
 export default defineComponent({
   name: "roleControl",
@@ -79,7 +91,7 @@ export default defineComponent({
     const checkList = reactive([]);
     const roleState = reactive({
       title: "",
-      jurisdiction: {
+      permissions: {
         personal: true,
         organization: true,
         team: true,
@@ -87,28 +99,31 @@ export default defineComponent({
         settings: false,
       },
     });
-    const roleData = reactive([
-      {
-        date: "2016-05-02",
-        name: "王小虎",
-        address: "上海市普陀区金沙江路 1518 弄",
-      },
-      {
-        date: "2016-05-04",
-        name: "王小虎",
-        address: "上海市普陀区金沙江路 1517 弄",
-      },
-      {
-        date: "2016-05-01",
-        name: "王小虎",
-        address: "上海市普陀区金沙江路 1519 弄",
-      },
-      {
-        date: "2016-05-03",
-        name: "王小虎",
-        address: "上海市普陀区金沙江路 1516 弄",
-      },
-    ]);
+    const roleData = reactive([]);
+
+    function permissionsName(key: string): string {
+      let name = "";
+      switch (key) {
+        case "personal":
+          name = "个人空间";
+          break;
+        case "organization":
+          name = "公司空间";
+          break;
+        case "team":
+          name = "部门空间";
+          break;
+        case "share":
+          name = "文件分享";
+          break;
+        case "settings":
+          name = "系统设置";
+          break;
+        default:
+          break;
+      }
+      return name;
+    }
 
     store.commit("setState", {
       name: "utilsBars",
@@ -131,8 +146,13 @@ export default defineComponent({
       roleAddVisible.value = true;
     }
 
-    onMounted(() => {
+    onMounted(async () => {
       console.log("");
+      const { data } = await roleList();
+      roleData.splice(0, roleData.length - 1);
+      roleData.push(...data);
+
+      console.log(roleData);
     });
     return {
       roleData,
@@ -141,6 +161,7 @@ export default defineComponent({
       roleState,
       checkList,
       save,
+      permissionsName
     };
   },
 });

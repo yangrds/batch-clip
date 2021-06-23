@@ -14,9 +14,11 @@ export const setMkdir = (params?: any): any => serve('post', `${address}/file/mk
 export const fileCopy = (params?: any): any => serve('post', `${address}/file/copy`, params ? params : {})
 
 
-
 /* system */
+/* 添加角色 */
 export const addRoleInfo = (params?: any): any => serve('post', `${address}/system/role/add`, params ? params : {})
+/* 角色列表 */
+export const roleList = (params?: any): any => serve('post', `${address}/system/role/list`, params ? params : {})
 
 
 function serve(type: string, url: string, params: any): any {
