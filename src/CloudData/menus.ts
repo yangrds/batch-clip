@@ -91,35 +91,6 @@ export const _menus: Menu[] = [
         ]
     },
     {
-        title: "系统设置",
-        icon: "icon-huabanfuben",
-        path: '/CloudFileClass/img',
-        open: false,
-        checked: false,
-        id: uuid(32, 32),
-        children: [
-            {
-                title: '角色管理',
-                oneKey: 'roleControl',
-                path: '/roleControl',
-                checked: false,
-                id: uuid(32, 32)
-            },
-            {
-                title: '用户管理',
-                path: '/CloudFiles',
-                checked: false,
-                id: uuid(32, 32)
-            },
-            {
-                title: '部门管理',
-                path: '/CloudFiles',
-                checked: false,
-                id: uuid(32, 32)
-            },
-        ]
-    },
-    {
         title: "最近浏览",
         icon: "icon-home",
         path: '/CloudFiles',
@@ -145,6 +116,35 @@ export const _menus: Menu[] = [
         checked: false,
         id: uuid(32, 32),
         children: []
+    },
+    {
+        title: "系统设置",
+        icon: "icon-huabanfuben",
+        path: '/CloudFileClass/img',
+        open: false,
+        checked: false,
+        id: uuid(32, 32),
+        children: [
+            {
+                title: '角色管理',
+                oneKey: 'roleControl',
+                path: '/roleControl',
+                checked: false,
+                id: uuid(32, 32)
+            },
+            {
+                title: '用户管理',
+                path: '/userControl',
+                checked: false,
+                id: uuid(32, 32)
+            },
+            {
+                title: '团队管理',
+                path: '/teamControl',
+                checked: false,
+                id: uuid(32, 32)
+            },
+        ]
     },
 ]
 

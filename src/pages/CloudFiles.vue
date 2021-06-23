@@ -160,10 +160,6 @@ export default defineComponent({
 
 
 <style lang="scss">
-.el-table th.is-leaf,
-.el-table td {
-  border: none;
-}
 </style>
 
 <style lang="scss" scoped>

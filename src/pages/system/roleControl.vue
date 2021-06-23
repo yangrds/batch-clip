@@ -11,13 +11,14 @@
   <div class="roleControl">
     <el-table :data="roleData" :height="scrollH" style="width: 100%">
       <el-table-column type="selection" width="25"> </el-table-column>
-      <el-table-column prop="title" label="名称" width="300px"> </el-table-column>
+      <el-table-column prop="title" label="名称" width="300px">
+      </el-table-column>
       <el-table-column prop="title" label="权限">
         <template #default="scope">
           <el-tag
-          size="small"
-          type = 'warning'
-           effect="dark"
+            size="small"
+            type="warning"
+            effect="dark"
             v-for="(item, key) in scope.row.permissions"
             :key="key"
             v-show="item"
@@ -138,8 +139,11 @@ export default defineComponent({
       ],
     });
 
-    function save(): void {
-      addRoleInfo(roleState);
+    async function save(): Promise<void> {
+      const { code } = await addRoleInfo(roleState);
+      if (code === 200) {
+        roleAddVisible.value = false;
+      }
     }
 
     function roleAdd() {
@@ -147,7 +151,6 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      console.log("");
       const { data } = await roleList();
       roleData.splice(0, roleData.length - 1);
       roleData.push(...data);
@@ -161,7 +164,7 @@ export default defineComponent({
       roleState,
       checkList,
       save,
-      permissionsName
+      permissionsName,
     };
   },
 });

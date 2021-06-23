@@ -23,3 +23,17 @@
         }
     }
 }
+
+.el-table th.is-leaf,
+.el-table td {
+    border: none !important;
+}
+.el-table {
+    background-color: #fcfbfd !important;
+    tr {
+        background-color: #fcfbfd !important;
+    }
+    th {
+        background-color: #fcfbfd !important;
+    }
+}

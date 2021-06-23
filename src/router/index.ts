@@ -6,7 +6,8 @@ import CloudGraphics from '../pages/CloudGraphics.vue'
 import CloudDataTransmission from '../pages/CloudDataTransmission.vue'
 import CloudFileClass from '../pages/CloudFileClass.vue'
 import roleControl from '../pages/system/roleControl.vue'
-
+import userControl from '../pages/system/userControl.vue'
+import teamControl from '../pages/system/teamControl.vue'
 
 const routes = [
     {
@@ -35,6 +36,15 @@ const routes = [
                 path: 'roleControl',
                 component: roleControl
             },
+            {
+                path: 'userControl',
+                component: userControl
+            },
+            {
+                path: 'teamControl',
+                component: teamControl
+            },
+            
             
 
         ]
