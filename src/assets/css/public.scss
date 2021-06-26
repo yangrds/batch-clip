@@ -36,4 +36,18 @@
     th {
         background-color: #fcfbfd !important;
     }
+    td .cell{
+        font-size: 14px !important;
+    }
+    &::before{
+        height: 0px !important;
+    }
+}
+.system-header {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
 }

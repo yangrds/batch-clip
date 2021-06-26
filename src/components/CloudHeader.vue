@@ -55,14 +55,14 @@
       </div>
     </div>
     <!-- 工具栏 -->
-    <div class="h-bottom">
+    <!-- <div class="h-bottom">
       <CloudButton
         v-for="(item, index) in utilsBars"
         :key="index"
         :row="item"
         @click="item.click"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 

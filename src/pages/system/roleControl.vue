@@ -9,7 +9,12 @@
 
 <template>
   <div class="roleControl">
-    <el-table :data="roleData" :height="scrollH" style="width: 100%">
+    <div class="system-header">
+      <el-button type="primary" size="small">创建</el-button>
+      <el-button size="small">编辑</el-button>
+      <el-button size="small">删除</el-button>
+    </div>
+    <el-table :data="roleData" :height="scrollH-50" style="width: 100%">
       <el-table-column type="selection" width="25"> </el-table-column>
       <el-table-column prop="title" label="名称" width="300px">
       </el-table-column>
@@ -82,11 +87,13 @@
 import store from "@/store";
 import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import { addRoleInfo, roleList } from "../../server/api";
-
+import sl from 'default-passive-events'
 export default defineComponent({
   name: "roleControl",
   components: {},
   setup() {
+    console.log(sl);
+    
     const scrollH = computed(() => store.state.scrollH);
     const roleAddVisible = ref(false);
     const checkList = reactive([]);

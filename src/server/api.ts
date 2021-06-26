@@ -15,10 +15,31 @@ export const fileCopy = (params?: any): any => serve('post', `${address}/file/co
 
 
 /* system */
+
 /* 添加角色 */
 export const addRoleInfo = (params?: any): any => serve('post', `${address}/system/role/add`, params ? params : {})
 /* 角色列表 */
 export const roleList = (params?: any): any => serve('post', `${address}/system/role/list`, params ? params : {})
+
+/* 添加用户 */
+export const addUserInfo = (params?: any): any => serve('post', `${address}/system/user/add`, params ? params : {})
+
+/* 用户列表 */
+export const userList = (params?: any): any => serve('post', `${address}/system/user/list`, params ? params : {})
+
+/* 创建团队 */
+export const addTeamInfo = (params?: any): any => serve('post', `${address}/system/team/add`, params ? params : {})
+
+/* 编辑团队信息 */
+export const editorTeamInfo = (params?: any): any => serve('post', `${address}/system/team/editor`, params ? params : {})
+
+/* 团队列表 */
+export const teamList = (params?: any): any => serve('post', `${address}/system/team/list`, params ? params : {})
+
+/* 团队删除 */
+export const teamDelete = (params?: any): any => serve('post', `${address}/system/team/delete`, params ? params : {})
+
+
 
 
 function serve(type: string, url: string, params: any): any {

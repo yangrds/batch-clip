@@ -9,7 +9,6 @@ export default {
         window.onresize = resize;
         function resize() {
             state.scrollH = document.querySelector('.cloud-main').getBoundingClientRect().height
-            console.log(state.scrollH);
         }
         resize()
     }
