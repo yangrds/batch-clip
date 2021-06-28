@@ -181,7 +181,6 @@ interface TeamType {
   _id?: string;
 }
 import { ElNotification, ElMessageBox, ElMessage } from "element-plus";
-import { result } from "lodash";
 
 export default defineComponent({
   name: "teamControl",

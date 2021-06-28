@@ -4196,6 +4196,14 @@ figures@^3.0.0:
   dependencies:
     escape-string-regexp "^1.0.5"
 
+file-chunk@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/file-chunk/-/file-chunk-1.1.1.tgz#f54e3f071e6c21969659e2687d9d914162049a6c"
+  integrity sha512-CCYyx5OtuqcbzV2NtObKCfetiYIsKkHyS/Qumlwsdjm23b8m7v7v8xC/AZjzN52pjuknii6hW7vrkmgqcTuI1w==
+  dependencies:
+    axios "^0.21.1"
+    spark-md5 "^3.0.1"
+
 file-entry-cache@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/file-entry-cache/download/file-entry-cache-5.0.1.tgz?cache=0&sync_timestamp=1613794357372&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffile-entry-cache%2Fdownload%2Ffile-entry-cache-5.0.1.tgz#ca0f6efa6dd3d561333fb14515065c2fafdf439c"
@@ -8292,6 +8300,11 @@ spark-md5@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npm.taobao.org/spark-md5/download/spark-md5-2.0.2.tgz#37b763847763ae7e7acef2ca5233d01e649a78b7"
   integrity sha1-N7djhHdjrn56zvLKUjPQHmSaeLc=
+
+spark-md5@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/spark-md5/-/spark-md5-3.0.1.tgz#83a0e255734f2ab4e5c466e5a2cfc9ba2aa2124d"
+  integrity sha512-0tF3AGSD1ppQeuffsLDIOWlKUd3lS92tFxcsrh5Pe3ZphhnoK+oXIBTzOAThZCiuINZLvpiLH/1VS1/ANEJVig==
 
 spdx-correct@^3.0.0:
   version "3.1.1"
