@@ -191,6 +191,7 @@ export default defineComponent({
       ArrayUpdate(userData, data);
     }
 
+
     /* 团队列表 */
     async function getteam() {
       const { data, code } = await teamList();
@@ -203,9 +204,6 @@ export default defineComponent({
         });
       });
 
-      console.log(temps);
-      
-
       code === 200 && ArrayUpdate(teamOptions, temps);
     }
 
@@ -215,13 +213,14 @@ export default defineComponent({
       userState.password = "123456";
       userState.jobId = "564464353";
       userState.jobName = "高级项目经理";
-      userState.portrait = "/files/1624902949047_3242.jpg";
+      userState.portrait = "";
       userState.superUser = false;
       userAddVisible.value = true;
     }
     function save() {
       addUserInfo(userState);
       userAddVisible.value = false;
+      getuser()
     }
     return {
       userData,

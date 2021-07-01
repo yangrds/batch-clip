@@ -27,6 +27,10 @@ export const addUserInfo = (params?: any): any => serve('post', `${address}/syst
 /* 用户列表 */
 export const userList = (params?: any): any => serve('post', `${address}/system/user/list`, params ? params : {})
 
+/* 用户删除 */
+export const userDelete = (params?: any): any => serve('post', `${address}/system/user/delete`, params ? params : {})
+
+
 /* 创建团队 */
 export const addTeamInfo = (params?: any): any => serve('post', `${address}/system/team/add`, params ? params : {})
 
