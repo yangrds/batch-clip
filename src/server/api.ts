@@ -13,7 +13,6 @@ export const setMkdir = (params?: any): any => serve('post', `${address}/file/mk
 /* 文件拷贝/移动 */
 export const fileCopy = (params?: any): any => serve('post', `${address}/file/copy`, params ? params : {})
 
-
 /* system */
 
 /* 添加角色 */
@@ -69,5 +68,5 @@ function serve(type: string, url: string, params: any): any {
 
 
 
-// export default { getFiles, getFileClass }
+export default { teamDelete ,userDelete}
 

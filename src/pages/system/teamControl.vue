@@ -174,6 +174,8 @@ import {
   watch,
 } from "vue";
 
+import { _remove } from "../../Utils/curd";
+
 interface TeamType {
   title: string;
   members: any[];
@@ -227,32 +229,7 @@ export default defineComponent({
 
     function removeTeamCclick(id?: string): void {
       const ids = id ? [id] : extract(teamSelection, "_id");
-      if (ids.length < 1) {
-        ElMessage.error('操作失败，没有数据被勾选！');
-        return;
-      }
-
-      ElMessageBox.confirm(
-        `此操作将永久删除 ${ids.length} 条数据, 是否继续?`,
-        "团队信息删除",
-        {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        }
-      )
-        .then(async () => {
-          const { code } = await teamDelete({ ids });
-          ElNotification({
-            title: "团队信息",
-            message: `团队删除${code === 200 ? "成功" : "失败"}`,
-            type: code === 200 ? "success" : "error",
-          });
-          getteam();
-        })
-        .catch(() => {
-          /*  */
-        });
+      _remove("teamDelete", ids, getteam);
     }
 
     /* 成员选择 */

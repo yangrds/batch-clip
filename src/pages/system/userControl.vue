@@ -1,11 +1,18 @@
 <template>
   <div class="userControl">
     <div class="system-header">
-      <el-button type="primary" size="small" @click="userAdd">添加</el-button>
-      <el-button size="small">编辑</el-button>
-      <el-button size="small">删除</el-button>
+      <el-button type="primary" size="small" @click="userInfoEvoke('add')"
+        >添加</el-button
+      >
+      <el-button size="small" @click="userInfoEvoke('editor')">编辑</el-button>
+      <el-button size="small" @click="removeUserCclick(null)">删除</el-button>
     </div>
-    <el-table :data="userData" :height="scrollH - 50" style="width: 100%">
+    <el-table
+      :data="userData"
+      @selection-change="userChange"
+      :height="scrollH - 50"
+      style="width: 100%"
+    >
       <el-table-column type="selection" width="25"> </el-table-column>
       <el-table-column label="头像" width="70">
         <template #default="scope">
@@ -16,13 +23,13 @@
           />
         </template>
       </el-table-column>
+      <el-table-column prop="title" label="昵称"> </el-table-column>
       <el-table-column prop="user" label="用户名"> </el-table-column>
       <el-table-column prop="superUser" label="超级用户">
         <template #default="scope">
           <span>{{ scope.row.superUser ? "是" : "否" }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="title" label="昵称"> </el-table-column>
       <el-table-column prop="jobName" label="职位"> </el-table-column>
       <el-table-column prop="jobId" label="工号"> </el-table-column>
 
@@ -36,102 +43,114 @@
     <el-dialog
       title="用户注册"
       v-model="userAddVisible"
-      width="800px"
+      width="700px"
       :before-close="(none) => none()"
     >
       <div class="user-model">
-        <div class="model-child">
-          <span>昵称</span>
-          <el-input
-            v-model="userState.title"
-            placeholder="请输入昵称"
-          ></el-input>
-        </div>
-        <div class="model-child">
-          <span>用户名</span>
-          <el-input
-            v-model="userState.user"
-            placeholder="请输入用户名"
-          ></el-input>
-        </div>
-        <div class="model-child">
-          <span>密码</span>
-          <el-input
-            show-password
-            v-model="userState.password"
-            placeholder="请输入密码"
-          ></el-input>
-        </div>
+        <el-form
+          ref="form"
+          :model="userState"
+          :inline="true"
+          :rules="rules"
+          label-width="80px"
+        >
+          <el-form-item label="活动名称" prop="title">
+            <el-input
+              style="width: 200px"
+              v-model="userState.title"
+              placeholder="请输入昵称"
+            ></el-input>
+          </el-form-item>
 
-        <div class="model-child">
-          <span>工号</span>
-          <el-input
-            v-model="userState.jobId"
-            placeholder="请输入工号"
-          ></el-input>
-        </div>
+          <el-form-item label="用户名" prop="user">
+            <el-input
+              style="width: 200px"
+              v-model="userState.user"
+              placeholder="请输入用户名"
+            ></el-input>
+          </el-form-item>
 
-        <div class="model-child">
-          <span>确认密码</span>
-          <el-input
-            v-model="confirmPassword"
-            show-password
-            placeholder="确认密码"
-          ></el-input>
-        </div>
+          <el-form-item label="密码" prop="password">
+            <el-input
+              style="width: 200px"
+              v-model="userState.password"
+              show-password
+              placeholder="请输入用户名"
+            ></el-input>
+          </el-form-item>
 
-        <div class="model-child">
-          <span>职位</span>
-          <el-input
-            v-model="userState.jobName"
-            placeholder="请输入职位"
-          ></el-input>
-        </div>
+          <el-form-item label="确认密码" prop="confirmPassword">
+            <el-input
+              style="width: 200px"
+              v-model="userState.confirmPassword"
+              show-password
+              placeholder="请输入用户名"
+            ></el-input>
+          </el-form-item>
 
-        <div class="model-child" style="width: 80%">
-          <span>加入团队</span>
-          <el-select
-            multiple
-            v-model="userState.team"
-            style="width: 600px"
-            placeholder="请选择"
-          >
-            <el-option
-              v-for="item in teamOptions"
-              :key="item.id"
-              :label="item.title"
-              :value="item.id"
+          <el-form-item label="工号" prop="jobId">
+            <el-input
+              style="width: 200px"
+              v-model="userState.jobId"
+              placeholder="请输入用户名"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="职位" prop="jobName">
+            <el-input
+              style="width: 200px"
+              v-model="userState.jobName"
+              placeholder="请输入职位"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="团队">
+            <el-select
+              multiple
+              v-model="userState.team"
+              style="width: 490px"
+              placeholder="请选择"
             >
-              <span style="float: left">{{ item.title }}</span>
-              <span style="float: right; color: #8492a6; font-size: 13px">{{
-                item.index
-              }}</span>
-            </el-option>
-          </el-select>
-        </div>
+              <el-option
+                v-for="item in teamOptions"
+                :key="item.id"
+                :label="item.title"
+                :value="item.id"
+              >
+                <span style="float: left">{{ item.title }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px">{{
+                  item.index
+                }}</span>
+              </el-option>
+            </el-select>
+          </el-form-item>
 
-        <div class="model-child">
-          <span>用户头像</span>
-          <div class="portrait" @click="portraitUpload">
-            <i class="el-icon-plus"></i>
-            <img
-              v-if="userState.portrait"
-              :src="`${host}${userState.portrait}`"
-            />
-          </div>
-        </div>
+          <el-form-item label="用户头像">
+            <div class="model-child" style="width: 200px">
+              <div class="portrait" @click="portraitUpload">
+                <i class="el-icon-plus"></i>
+                <img
+                  width="100"
+                  v-if="userState.portrait"
+                  :src="`${host}${userState.portrait}`"
+                />
+              </div>
+            </div>
+          </el-form-item>
 
-        <div class="model-child">
-          <span>超级用户</span>
-          <el-switch
-            v-model="userState.superUser"
-            style="margin-top: 2px"
-          ></el-switch>
-        </div>
+          <el-form-item label="超级用户">
+            <el-switch
+              v-model="userState.superUser"
+              style="margin-top: 2px; width: 200px"
+            ></el-switch>
+          </el-form-item>
 
-        <div class="model-btn">
-          <el-button type="primary" @click="save">保存</el-button>
-        </div>
+          <el-form-item>
+            <div style="width: 660px; display: flex; justify-content: flex-end">
+              <el-button type="primary" @click="save">保存</el-button>
+            </div>
+          </el-form-item>
+        </el-form>
       </div>
     </el-dialog>
   </div>
@@ -145,6 +164,8 @@ import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import { addUserInfo, userList, teamList } from "../../server/api";
 import { upload } from "../../server/upload";
 import CloudChunk from "file-chunk";
+import { _remove } from "@/Utils/curd";
+import { ElMessage } from "element-plus";
 export default defineComponent({
   name: "userControl",
   components: {},
@@ -156,6 +177,7 @@ export default defineComponent({
       title: "",
       user: "",
       password: "",
+      confirmPassword: "",
       jobId: "",
       jobName: "",
       portrait: "",
@@ -163,15 +185,68 @@ export default defineComponent({
       team: [],
     });
 
+    const form = ref(null);
+
     const teamOptions = reactive([]);
 
     const cities = reactive([]);
+
+    const rules = reactive({
+      title: [
+        { required: true, message: "请输入昵称", trigger: "blur" },
+        { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" },
+      ],
+      user: [
+        { required: true, message: "请输入用户名", trigger: "blur" },
+        { min: 6, max: 12, message: "长度在 6 到 12 个字符", trigger: "blur" },
+      ],
+
+      password: [
+        { required: true, message: "请输入密码", trigger: "blur" },
+        { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" },
+      ],
+
+      confirmPassword: [
+        { required: true, message: "请确认密码", trigger: "blur" },
+        { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" },
+      ],
+
+      jobId: [
+        { required: true, message: "请输入工号", trigger: "blur" },
+        { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" },
+      ],
+
+      jobName: [
+        { required: true, message: "请输入职位", trigger: "blur" },
+        { min: 6, max: 20, message: "长度在 6 到 20 个字符", trigger: "blur" },
+      ],
+    });
+
+    /* 用户当前勾选信息 */
+    let userSelection = [];
 
     const userAddVisible = ref(false);
     onMounted(async () => {
       getuser();
       getteam();
     });
+
+    /* 成员待选列表，数据同步 */
+    function userChange(selection: any[]) {
+      userSelection = selection;
+    }
+
+    function removeUserCclick(id?: string | null): void {
+      const ids = id ? [id] : extract(userSelection, "_id");
+      _remove("userDelete", ids, getuser);
+    }
+
+    /* 将数组内指定key提取出来形成一个全新的数组 */
+    function extract(arr: any, key: string): string[] {
+      return arr.map((item: any) => {
+        return item[key];
+      });
+    }
 
     /* proxy 数组 替换数据 */
     function ArrayUpdate(arr: any[], list: any[]) {
@@ -191,7 +266,6 @@ export default defineComponent({
       ArrayUpdate(userData, data);
     }
 
-
     /* 团队列表 */
     async function getteam() {
       const { data, code } = await teamList();
@@ -207,20 +281,42 @@ export default defineComponent({
       code === 200 && ArrayUpdate(teamOptions, temps);
     }
 
-    function userAdd(): void {
-      userState.title = "";
-      userState.user = "54645645";
-      userState.password = "123456";
-      userState.jobId = "564464353";
-      userState.jobName = "高级项目经理";
-      userState.portrait = "";
-      userState.superUser = false;
+    function userInfoEvoke(type: string): void {
+      if (type === "add") {
+        userState.title = "";
+        userState.user = "54645645";
+        userState.password = "123456";
+        userState.jobId = "564464353";
+        userState.jobName = "高级项目经理";
+        userState.portrait = "";
+        userState.superUser = false;
+        ArrayUpdate(userState.team, []);
+      }
+
       userAddVisible.value = true;
     }
     function save() {
-      addUserInfo(userState);
-      userAddVisible.value = false;
-      getuser()
+      const reg = /^[0-9a-zA-Z]+$/;
+
+      if (!reg.test(userState.user)) {
+        ElMessage.warning("用户名非法");
+        return;
+      }
+
+      if (userState.confirmPassword != userState.password) {
+        ElMessage.warning("两次密码输入不一致");
+        return;
+      }
+
+      form.value.validate((valid: boolean) => {
+        if (valid) {
+          addUserInfo(userState);
+          userAddVisible.value = false;
+          getuser();
+        } else {
+          return false;
+        }
+      });
     }
     return {
       userData,
@@ -230,9 +326,13 @@ export default defineComponent({
       scrollH,
       confirmPassword,
       teamOptions,
-      userAdd,
+      rules,
+      form,
+      userInfoEvoke,
       save,
       portraitUpload,
+      userChange,
+      removeUserCclick,
     };
   },
 });
@@ -246,23 +346,6 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   .model-child {
-    width: 50%;
-    padding-left: 80px;
-    margin-bottom: 30px;
-    display: flex;
-    position: relative;
-    box-sizing: border-box;
-    > span {
-      width: 80px;
-      padding-right: 10px;
-      margin-right: 10px;
-      box-sizing: border-box;
-      position: absolute;
-      left: 0;
-      top: 0;
-      font-size: 16px;
-      text-align: right;
-    }
     .portrait {
       width: 100px;
       height: 100px;
@@ -273,17 +356,12 @@ export default defineComponent({
       align-items: center;
       cursor: pointer;
       position: relative;
-      > i {
-        font-size: 50px;
-        color: rgba($color: #888, $alpha: 0.2);
-      }
       > img {
         width: 100%;
         height: 100%;
         position: absolute;
-        left: 0;
         top: 0;
-        z-index: 2;
+        left: 0;
       }
     }
   }
