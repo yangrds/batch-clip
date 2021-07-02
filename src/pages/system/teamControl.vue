@@ -128,7 +128,6 @@
     <el-dialog
       title="用户列表"
       v-model="memberVisible"
-      ref="memberTable"
       width="700px"
       top="50px"
       :before-close="(none) => none()"
