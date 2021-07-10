@@ -1,24 +1,28 @@
-# future
+# batch-clip批量图像裁剪插件文档
 
-## Project setup
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+npm i batch-clip
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
+```javascript
+// 将图形裁剪控制台渲染至指定DOM节点，Files（文件列表）
+new Clip({ el: '#file-clip',Files:[file,file]})
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Attributes
+
+| 参数   | 说明                                        | 必填 | 类型[默认]                 |
+| ------ | ------------------------------------------- | ---- | -------------------------- |
+| el     | 渲染至指定DOM节点                           | 是   | string｜Document           |
+| Files  | 文件列表，兼容File对象和在线图片URL         | 是   | Array<File>｜Array<string> |
+| isFile | 默认true，false为远程图片模式。             | 否   | Boolean[true]              |
+| zoom   | 缩放模式，尺寸充满可视区域，false为原图模式 | 否   | Boolean[false]             |
+
+## Hook function
+
+| 名称       | 说明                 | 注入参数    |
+| ---------- | -------------------- | ----------- |
+| submit     | 注入裁剪完毕的文件列 | Array<File> |
+| LoadFailed | 远程图像资源加载失败 | string      |
+| interrupt  | 程序中断             | 无          |
+

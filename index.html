@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/index.js"></script>
+    <link rel="stylesheet" href="./lib/clip.css">
+</head>
+
+<body>
+    <input type="file" multiple class="file">
+    <button class="show">加载网络图像</button>
+    <input type="checkbox" class="switch">视口缩放</input>
+    <div style="width: 1000px;margin-top: 40px;margin-left: 50px;" id="file-clip">
+    </div>
+
+
+
+
+
+    <script>
+        // const {Clip} = window.Clip
+        /* 是否缩放（默认原图尺寸） */
+        let zoom = false
+
+        /* 设置缩放 */
+        document.querySelector('.switch').addEventListener('change', (e) => {
+            zoom = e.target.checked
+        })
+
+        /* 加载网络资源 */
+        document.querySelector('.show').addEventListener('click', function () {
+            onload([
+                "http://101.34.62.75:6005/0je5xw.jpg",
+                "http://101.34.62.75:6005/Material_00002.jpg",
+            ], null)
+        })
+
+        /* 选择图片 */
+        document.querySelector('.file').addEventListener('change', (e) => {
+            const Files = Array.from(e.target.files)
+            onload(Files, true)
+        })
+
+
+        const options = {
+            el: '#file-clip',
+            Files: [file, file],
+            isFile: true,
+            zoom: true
+        }
+   
+        /* 触发 */
+        function onload(Files, isFile) {
+            const clip = new Clip({ el: '#file-clip', Files, isFile, zoom })
+            clip.submit = (files) => {
+                console.log(files);
+            }
+        }
+    </script>
+</body>
+
+</html>
