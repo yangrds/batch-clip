@@ -14,11 +14,8 @@
     <input type="file" multiple class="file">
     <button class="show">加载网络图像</button>
     <input type="checkbox" class="switch">视口缩放</input>
-    <div style="width: 1000px;margin-top: 40px;margin-left: 50px;" id="file-clip">
+    <div style="width: 800px;margin-top: 40px;margin-left: 50px;" id="file-clip">
     </div>
-
-
-
 
 
     <script>
@@ -34,8 +31,10 @@
         /* 加载网络资源 */
         document.querySelector('.show').addEventListener('click', function () {
             onload([
-                "http://101.34.62.75:6005/0je5xw.jpg",
-                "http://101.34.62.75:6005/Material_00002.jpg",
+                "http://101.34.62.75:6005/img/0001.webp",
+                "http://101.34.62.75:6005/img/0002.jpg",
+                "http://101.34.62.75:6005/img/0003.jpg",
+                "http://101.34.62.75:6005/img/0004.webp",
             ], null)
         })
 
@@ -45,13 +44,6 @@
             onload(Files, true)
         })
 
-
-        const options = {
-            el: '#file-clip',
-            Files: [file, file],
-            isFile: true,
-            zoom: true
-        }
    
         /* 触发 */
         function onload(Files, isFile) {

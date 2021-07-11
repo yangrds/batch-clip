@@ -1,6 +1,12 @@
 # batch-clip基于JavaScript的批量图片裁剪插件
 
-**支持功能**：批量图片载入、文件（File）加载、远程资源加载（URL）、图片缩放、原图载入。**钩子函数：**图片加载失败、程序中断、裁剪完毕。
+**支持功能**：批量图片载入、文件（File）加载、远程资源加载（URL）、图片缩放、原图载入。
+
+**钩子函数**：图片加载失败、程序中断、裁剪完毕。
+
+**demo目录内为简单测试案例**
+
+演示地址http://101.34.62.75:6005/
 
 ```
 npm i batch-clip
@@ -8,7 +14,17 @@ npm i batch-clip
 
 ```javascript
 // 将图形裁剪控制台渲染至指定DOM节点，Files（文件列表）
-new Clip({ el: '#file-clip',Files:[file,file]})
+const clip = new Clip({ el: '#file-clip',Files:[file,file]})
+// 点击保存后的钩子
+clip.submit = (files)=>{
+  console.log(files)
+}
+// 当远程图片加载失败后（常见为跨域），触发次该方法
+clip.LoadFailed = (url)=>{
+  console.log(url)
+}
+// 当所有远程图片均加载失败，导致程序中断，触发该方法
+clip.interrupt = ()=>{}
 ```
 
 ## Attributes

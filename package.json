@@ -1,6 +1,6 @@
 {
   "name": "batch-clip",
-  "version": "1.0.9",
+  "version": "1.1.1",
   "description": "JavaScript批量图片裁剪插件，功能包括：批量图片裁剪，远程裁剪，原图裁剪，缩放裁剪",
   "main": "lib/index.js",
   "scripts": {

@@ -20,10 +20,10 @@ export default class Clip {
   fileId
   size
   sizeUpdate() {
-    _q('.size-x_3648808d57fd4b339435b32b99625a86').value = _q('#clip_3648808d57fd4b339435b32b99625a86').offsetLeft - _q('#main-img_3648808d57fd4b339435b32b99625a86').offsetLeft
-    _q('.size-y_3648808d57fd4b339435b32b99625a86').value = _q('#clip_3648808d57fd4b339435b32b99625a86').offsetTop - 20
-    _q('.size-w_3648808d57fd4b339435b32b99625a86').value = parseInt(getCss(_q('#clip_3648808d57fd4b339435b32b99625a86'), "width"))
-    _q('.size-h_3648808d57fd4b339435b32b99625a86').value = parseInt(getCss(_q('#clip_3648808d57fd4b339435b32b99625a86'), "height"))
+    _q('.size-x_c7de2eb38b9644f7a21f57b2348af5fd').value = _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').offsetLeft - _q('#main-img_c7de2eb38b9644f7a21f57b2348af5fd').offsetLeft
+    _q('.size-y_c7de2eb38b9644f7a21f57b2348af5fd').value = _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').offsetTop - 20
+    _q('.size-w_c7de2eb38b9644f7a21f57b2348af5fd').value = parseInt(getCss(_q('#clip_c7de2eb38b9644f7a21f57b2348af5fd'), "width"))
+    _q('.size-h_c7de2eb38b9644f7a21f57b2348af5fd').value = parseInt(getCss(_q('#clip_c7de2eb38b9644f7a21f57b2348af5fd'), "height"))
   }
 
   constructor({ el, Files, isFile, zoom }) {
@@ -61,8 +61,8 @@ export default class Clip {
 
     /* 容器缩放尺寸 */
     this.zoomSize = {
-      width: _q('.img-wrap_3648808d57fd4b339435b32b99625a86').getBoundingClientRect().width - 40,
-      height: _q('.img-wrap_3648808d57fd4b339435b32b99625a86').getBoundingClientRect().height - 46
+      width: _q('.img-wrap_c7de2eb38b9644f7a21f57b2348af5fd').getBoundingClientRect().width - 40,
+      height: _q('.img-wrap_c7de2eb38b9644f7a21f57b2348af5fd').getBoundingClientRect().height - 46
     }
 
     /* 初始化 */
@@ -74,12 +74,12 @@ export default class Clip {
   async clipInit(Files) {
     const _this = this
 
-    _q('.clip-loading_3648808d57fd4b339435b32b99625a86>i').style.width = '0%'
+    _q('.clip-loading_c7de2eb38b9644f7a21f57b2348af5fd>i').style.width = '0%'
 
 
 
     for (let i = 0; i < Files.length; i++) {
-      _q('.clip-loading_3648808d57fd4b339435b32b99625a86>i').style.width = `${Percentage(i + 1, Files.length)}%`
+      _q('.clip-loading_c7de2eb38b9644f7a21f57b2348af5fd>i').style.width = `${Percentage(i + 1, Files.length)}%`
       const id = 'tab_' + uuid(16, 16)
       /* 加载文件 */
       const res = await _this.urlToFile(Files[i], _this.isFile)
@@ -98,7 +98,7 @@ export default class Clip {
     }
 
     /* 图像加载完毕，进度遮罩层隐藏 */
-    _q('.clip-mask_3648808d57fd4b339435b32b99625a86').style.display = 'none'
+    _q('.clip-mask_c7de2eb38b9644f7a21f57b2348af5fd').style.display = 'none'
 
     /* 图像容器为空（无加载成功资源） */
     if (JSON.stringify(_this.fileImgs) === '{}') {
@@ -108,7 +108,7 @@ export default class Clip {
     }
 
     /* 顶部图组 */
-    const headImgs = _q('.files-tab_3648808d57fd4b339435b32b99625a86')
+    const headImgs = _q('.files-tab_c7de2eb38b9644f7a21f57b2348af5fd')
     /* 图组DOM容器 */
     let html = ''
     /* 遍历容器图像，注入图组DOM容器 */
@@ -124,7 +124,7 @@ export default class Clip {
         /* 记录文件ID */
         _this.fileId = element.id
         /* 图组内容->渲染主图 */
-        _q('#main-img_3648808d57fd4b339435b32b99625a86').src = element.src
+        _q('#main-img_c7de2eb38b9644f7a21f57b2348af5fd').src = element.src
         /* 初始化裁剪框，Xaxis、Yaxis、width、height */
         _this.resetTool(100, 100)
         /* 图像信息更新 */
@@ -144,14 +144,14 @@ export default class Clip {
     _this.sizeUpdate()
 
     /* 裁剪区域交互监听 */
-    _q('.size-y_3648808d57fd4b339435b32b99625a86').oninput = (e) => _this.setSize.call(_this, 'size-y_3648808d57fd4b339435b32b99625a86', e.target.value)
-    _q('.size-x_3648808d57fd4b339435b32b99625a86').oninput = (e) => _this.setSize.call(_this, 'size-x_3648808d57fd4b339435b32b99625a86', e.target.value)
-    _q('.size-w_3648808d57fd4b339435b32b99625a86').oninput = (e) => _this.setSize.call(_this, 'size-w_3648808d57fd4b339435b32b99625a86', e.target.value)
-    _q('.size-h_3648808d57fd4b339435b32b99625a86').oninput = (e) => _this.setSize.call(_this, 'size-h_3648808d57fd4b339435b32b99625a86', e.target.value)
+    _q('.size-y_c7de2eb38b9644f7a21f57b2348af5fd').oninput = (e) => _this.setSize.call(_this, 'size-y_c7de2eb38b9644f7a21f57b2348af5fd', e.target.value)
+    _q('.size-x_c7de2eb38b9644f7a21f57b2348af5fd').oninput = (e) => _this.setSize.call(_this, 'size-x_c7de2eb38b9644f7a21f57b2348af5fd', e.target.value)
+    _q('.size-w_c7de2eb38b9644f7a21f57b2348af5fd').oninput = (e) => _this.setSize.call(_this, 'size-w_c7de2eb38b9644f7a21f57b2348af5fd', e.target.value)
+    _q('.size-h_c7de2eb38b9644f7a21f57b2348af5fd').oninput = (e) => _this.setSize.call(_this, 'size-h_c7de2eb38b9644f7a21f57b2348af5fd', e.target.value)
 
 
     /* 废弃当前所裁剪图像，从缓存容器恢复原图（如果该图片发生过重载入，那么只能恢复原图到上一次的重载入的图像） */
-    _q('#clip-back_3648808d57fd4b339435b32b99625a86').onclick = () => {
+    _q('#clip-back_c7de2eb38b9644f7a21f57b2348af5fd').onclick = () => {
       _this.fileImgs[this.fileId] = _this.cacheFiles[_this.fileId]
       _this.infoUpdate()
     }
@@ -160,7 +160,7 @@ export default class Clip {
     保存图片，将剪辑完毕的图片注入submit钩子函数（用户可通过重写该实例方法，接收裁剪完毕的图像）
     格式为：File[]
     */
-    _q('#clip-save_3648808d57fd4b339435b32b99625a86').onclick = () => {
+    _q('#clip-save_c7de2eb38b9644f7a21f57b2348af5fd').onclick = () => {
       const files = []
       for (const key in _this.fileImgs) {
         files.push(_this.fileImgs[key])
@@ -192,18 +192,18 @@ export default class Clip {
 
   setSize(type, value) {
     const _this = this
-    if (type === "size-x_3648808d57fd4b339435b32b99625a86") {
+    if (type === "size-x_c7de2eb38b9644f7a21f57b2348af5fd") {
       _this.params.left = parseInt(value) + 20 + "px";
-      _q('#clip_3648808d57fd4b339435b32b99625a86').style.left = parseInt(value) + 20 + "px";
-    } else if (type === "size-y_3648808d57fd4b339435b32b99625a86") {
+      _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').style.left = parseInt(value) + 20 + "px";
+    } else if (type === "size-y_c7de2eb38b9644f7a21f57b2348af5fd") {
       _this.params.top = parseInt(value) + 20 + "px";
-      _q('#clip_3648808d57fd4b339435b32b99625a86').style.top = parseInt(value) + 20 + "px";
-    } else if (type === "size-w_3648808d57fd4b339435b32b99625a86") {
+      _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').style.top = parseInt(value) + 20 + "px";
+    } else if (type === "size-w_c7de2eb38b9644f7a21f57b2348af5fd") {
       _this.params.width = parseInt(value) + "px";
-      _q('#clip_3648808d57fd4b339435b32b99625a86').style.width = parseInt(value) + "px";
-    } else if (type === "size-h_3648808d57fd4b339435b32b99625a86") {
+      _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').style.width = parseInt(value) + "px";
+    } else if (type === "size-h_c7de2eb38b9644f7a21f57b2348af5fd") {
       _this.params.height = parseInt(value) + "px";
-      _q('#clip_3648808d57fd4b339435b32b99625a86').style.height = parseInt(value) + "px";
+      _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').style.height = parseInt(value) + "px";
     }
   }
 
@@ -237,23 +237,23 @@ export default class Clip {
     _q('#' + _this.fileId).src = img.src
 
     /* 更新主图 */
-    _q('#main-img_3648808d57fd4b339435b32b99625a86').src = img.src
+    _q('#main-img_c7de2eb38b9644f7a21f57b2348af5fd').src = img.src
 
 
 
     /* 更新当前图像像素 */
-    _q('#file-pixel_3648808d57fd4b339435b32b99625a86').innerText = img.naturalWidth + '*' + img.naturalHeight
+    _q('#file-pixel_c7de2eb38b9644f7a21f57b2348af5fd').innerText = img.naturalWidth + '*' + img.naturalHeight
     /* 更新当前文件大小 */
-    _q('#file-byte_3648808d57fd4b339435b32b99625a86').innerText = sizeCount(file.size)
+    _q('#file-byte_c7de2eb38b9644f7a21f57b2348af5fd').innerText = sizeCount(file.size)
 
   }
 
 
   resetTool(width, height) {
-    _q('#clip_3648808d57fd4b339435b32b99625a86').style.left = '20px';
-    _q('#clip_3648808d57fd4b339435b32b99625a86').style.top = '20px';
-    _q('#clip_3648808d57fd4b339435b32b99625a86').style.width = width + 'px';
-    _q('#clip_3648808d57fd4b339435b32b99625a86').style.height = height + 'px';
+    _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').style.left = '20px';
+    _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').style.top = '20px';
+    _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').style.width = width + 'px';
+    _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd').style.height = height + 'px';
     this.params.left = '20px';
     this.params.top = '20px';
     this.params.width = width + 'px';
@@ -358,8 +358,8 @@ export default class Clip {
     */
   async drawImageFun() {
     const _this = this
-    _q('#clip-determine_3648808d57fd4b339435b32b99625a86').onclick = async () => {
-      let img = _q('#main-img_3648808d57fd4b339435b32b99625a86')
+    _q('#clip-determine_c7de2eb38b9644f7a21f57b2348af5fd').onclick = async () => {
+      let img = _q('#main-img_c7de2eb38b9644f7a21f57b2348af5fd')
       let sx = parseInt(_this.params.left) - img.offsetLeft
       let sy = parseInt(_this.params.top) - img.offsetTop
       let swidth = parseInt(_this.params.width)
@@ -378,7 +378,7 @@ export default class Clip {
    */
   clipReload() {
     const _this = this
-    _q('#clip-reload_3648808d57fd4b339435b32b99625a86').onclick = () => {
+    _q('#clip-reload_c7de2eb38b9644f7a21f57b2348af5fd').onclick = () => {
       /* 在内存中创建一个input对象（无需注入DOM） */
       const input = document.createElement('input')
       /* 改为文件模式 */
@@ -407,95 +407,95 @@ export default class Clip {
   // 拖拽事件注册，八方向缩放事件注册
   moveinit() {
     // 拖拽
-    this.moveDragFun(_q('#mask_3648808d57fd4b339435b32b99625a86'), _q('#clip_3648808d57fd4b339435b32b99625a86'), 'clip')
+    this.moveDragFun(_q('#mask_c7de2eb38b9644f7a21f57b2348af5fd'), _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd'), 'clip')
     // 左上
-    this.moveDragFun(_q('#leftTop_3648808d57fd4b339435b32b99625a86'), _q('#clip_3648808d57fd4b339435b32b99625a86'), 'leftTop')
+    this.moveDragFun(_q('#leftTop_c7de2eb38b9644f7a21f57b2348af5fd'), _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd'), 'leftTop')
     // 左下
-    this.moveDragFun(_q('#leftBot_3648808d57fd4b339435b32b99625a86'), _q('#clip_3648808d57fd4b339435b32b99625a86'), 'leftBot')
+    this.moveDragFun(_q('#leftBot_c7de2eb38b9644f7a21f57b2348af5fd'), _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd'), 'leftBot')
     // 右上
-    this.moveDragFun(_q('#rightTop_3648808d57fd4b339435b32b99625a86'), _q('#clip_3648808d57fd4b339435b32b99625a86'), 'rightTop')
+    this.moveDragFun(_q('#rightTop_c7de2eb38b9644f7a21f57b2348af5fd'), _q('#clip_c7de2eb38b9644f7a21f57b2348af5fd'), 'rightTop')
     // 右下
-    this.moveDragFun(_q("#rightBot_3648808d57fd4b339435b32b99625a86"), _q("#clip_3648808d57fd4b339435b32b99625a86"), "rightBot");
+    this.moveDragFun(_q("#rightBot_c7de2eb38b9644f7a21f57b2348af5fd"), _q("#clip_c7de2eb38b9644f7a21f57b2348af5fd"), "rightBot");
     // 上中
-    this.moveDragFun(_q("#topCenter_3648808d57fd4b339435b32b99625a86"), _q("#clip_3648808d57fd4b339435b32b99625a86"), "topCenter");
+    this.moveDragFun(_q("#topCenter_c7de2eb38b9644f7a21f57b2348af5fd"), _q("#clip_c7de2eb38b9644f7a21f57b2348af5fd"), "topCenter");
     // 下中
-    this.moveDragFun(_q("#botCenter_3648808d57fd4b339435b32b99625a86"), _q("#clip_3648808d57fd4b339435b32b99625a86"), "botCenter");
+    this.moveDragFun(_q("#botCenter_c7de2eb38b9644f7a21f57b2348af5fd"), _q("#clip_c7de2eb38b9644f7a21f57b2348af5fd"), "botCenter");
     // 右中
-    this.moveDragFun(_q("#rightCenter_3648808d57fd4b339435b32b99625a86"), _q("#clip_3648808d57fd4b339435b32b99625a86"), "rightCenter");
+    this.moveDragFun(_q("#rightCenter_c7de2eb38b9644f7a21f57b2348af5fd"), _q("#clip_c7de2eb38b9644f7a21f57b2348af5fd"), "rightCenter");
     // 左中
-    this.moveDragFun(_q("#leftCenter_3648808d57fd4b339435b32b99625a86"), _q("#clip_3648808d57fd4b339435b32b99625a86"), "leftCenter");
+    this.moveDragFun(_q("#leftCenter_c7de2eb38b9644f7a21f57b2348af5fd"), _q("#clip_c7de2eb38b9644f7a21f57b2348af5fd"), "leftCenter");
 
   }
 
   template() {
-    let html = `<div id="clip-tailoring_3648808d57fd4b339435b32b99625a86">
+    let html = `<div id="clip-tailoring_c7de2eb38b9644f7a21f57b2348af5fd">
 
-    <div class="clip-mask_3648808d57fd4b339435b32b99625a86">
-        <div class="clip-loading_3648808d57fd4b339435b32b99625a86">
+    <div class="clip-mask_c7de2eb38b9644f7a21f57b2348af5fd">
+        <div class="clip-loading_c7de2eb38b9644f7a21f57b2348af5fd">
             <i></i>
         </div>
     </div>
 
-    <div class="files-tab_3648808d57fd4b339435b32b99625a86">
+    <div class="files-tab_c7de2eb38b9644f7a21f57b2348af5fd">
     </div>
 
-    <div class="utils_3648808d57fd4b339435b32b99625a86">
-        <div class="child-size_3648808d57fd4b339435b32b99625a86">
+    <div class="utils_c7de2eb38b9644f7a21f57b2348af5fd">
+        <div class="child-size_c7de2eb38b9644f7a21f57b2348af5fd">
             <span>X：</span>
-            <input class="size-x_3648808d57fd4b339435b32b99625a86" type="number" />
+            <input class="size-x_c7de2eb38b9644f7a21f57b2348af5fd" type="number" />
         </div>
 
-        <div class="child-size_3648808d57fd4b339435b32b99625a86">
+        <div class="child-size_c7de2eb38b9644f7a21f57b2348af5fd">
             <span>Y：</span>
-            <input class="size-y_3648808d57fd4b339435b32b99625a86" type="number" />
+            <input class="size-y_c7de2eb38b9644f7a21f57b2348af5fd" type="number" />
         </div>
 
-        <div class="child-size_3648808d57fd4b339435b32b99625a86">
+        <div class="child-size_c7de2eb38b9644f7a21f57b2348af5fd">
             <span>W：</span>
-            <input class="size-w_3648808d57fd4b339435b32b99625a86" type="number" />
+            <input class="size-w_c7de2eb38b9644f7a21f57b2348af5fd" type="number" />
         </div>
 
-        <div class="child-size_3648808d57fd4b339435b32b99625a86">
+        <div class="child-size_c7de2eb38b9644f7a21f57b2348af5fd">
             <span>H：</span>
-            <input class="size-h_3648808d57fd4b339435b32b99625a86" type="number" />
+            <input class="size-h_c7de2eb38b9644f7a21f57b2348af5fd" type="number" />
         </div>
-        <div class="child-pixel_3648808d57fd4b339435b32b99625a86">
+        <div class="child-pixel_c7de2eb38b9644f7a21f57b2348af5fd">
             <span>P：</span>
-            <span id="file-pixel_3648808d57fd4b339435b32b99625a86"></span>
+            <span id="file-pixel_c7de2eb38b9644f7a21f57b2348af5fd"></span>
         </div>
-        <div class="child-pixel_3648808d57fd4b339435b32b99625a86">
+        <div class="child-pixel_c7de2eb38b9644f7a21f57b2348af5fd">
             <span>S：</span>
-            <span id="file-byte_3648808d57fd4b339435b32b99625a86"></span>
+            <span id="file-byte_c7de2eb38b9644f7a21f57b2348af5fd"></span>
         </div>
 
-        <div class="clip-btns_3648808d57fd4b339435b32b99625a86">
-            <div class="clip-child_3648808d57fd4b339435b32b99625a86" id="clip-reload_3648808d57fd4b339435b32b99625a86">
+        <div class="clip-btns_c7de2eb38b9644f7a21f57b2348af5fd">
+            <div class="clip-child_c7de2eb38b9644f7a21f57b2348af5fd" id="clip-reload_c7de2eb38b9644f7a21f57b2348af5fd">
                 <span>重载</span>
             </div>
-            <div class="clip-child_3648808d57fd4b339435b32b99625a86" id="clip-determine_3648808d57fd4b339435b32b99625a86">
+            <div class="clip-child_c7de2eb38b9644f7a21f57b2348af5fd" id="clip-determine_c7de2eb38b9644f7a21f57b2348af5fd">
                 <span>裁剪</span>
             </div>
-            <div class="clip-child_3648808d57fd4b339435b32b99625a86" id="clip-back_3648808d57fd4b339435b32b99625a86">
+            <div class="clip-child_c7de2eb38b9644f7a21f57b2348af5fd" id="clip-back_c7de2eb38b9644f7a21f57b2348af5fd">
                 <span>回退</span>
             </div>
-            <div class="clip-child_3648808d57fd4b339435b32b99625a86" id="clip-save_3648808d57fd4b339435b32b99625a86">
+            <div class="clip-child_c7de2eb38b9644f7a21f57b2348af5fd" id="clip-save_c7de2eb38b9644f7a21f57b2348af5fd">
                 <span>保存</span>
             </div>
         </div>
     </div>
-    <div class="img-wrap_3648808d57fd4b339435b32b99625a86">
-        <div id="clip_3648808d57fd4b339435b32b99625a86">
-            <div id="mask_3648808d57fd4b339435b32b99625a86"></div>
-            <div id="leftTop_3648808d57fd4b339435b32b99625a86"></div>
-            <div id="rightTop_3648808d57fd4b339435b32b99625a86"></div>
-            <div id="leftBot_3648808d57fd4b339435b32b99625a86"></div>
-            <div id="rightBot_3648808d57fd4b339435b32b99625a86"></div>
-            <div id="leftCenter_3648808d57fd4b339435b32b99625a86"></div>
-            <div id="rightCenter_3648808d57fd4b339435b32b99625a86"></div>
-            <div id="topCenter_3648808d57fd4b339435b32b99625a86"></div>
-            <div id="botCenter_3648808d57fd4b339435b32b99625a86"></div>
+    <div class="img-wrap_c7de2eb38b9644f7a21f57b2348af5fd">
+        <div id="clip_c7de2eb38b9644f7a21f57b2348af5fd">
+            <div id="mask_c7de2eb38b9644f7a21f57b2348af5fd"></div>
+            <div id="leftTop_c7de2eb38b9644f7a21f57b2348af5fd"></div>
+            <div id="rightTop_c7de2eb38b9644f7a21f57b2348af5fd"></div>
+            <div id="leftBot_c7de2eb38b9644f7a21f57b2348af5fd"></div>
+            <div id="rightBot_c7de2eb38b9644f7a21f57b2348af5fd"></div>
+            <div id="leftCenter_c7de2eb38b9644f7a21f57b2348af5fd"></div>
+            <div id="rightCenter_c7de2eb38b9644f7a21f57b2348af5fd"></div>
+            <div id="topCenter_c7de2eb38b9644f7a21f57b2348af5fd"></div>
+            <div id="botCenter_c7de2eb38b9644f7a21f57b2348af5fd"></div>
         </div>
-        <img id="main-img_3648808d57fd4b339435b32b99625a86" ondragstart="return false" src="" />
+        <img id="main-img_c7de2eb38b9644f7a21f57b2348af5fd" ondragstart="return false" src="" />
     </div>
 </div>`
     this.element.innerHTML = html
