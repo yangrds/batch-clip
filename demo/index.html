@@ -13,6 +13,7 @@
 <body>
     <input type="file" multiple class="file">
     <button class="show">加载网络图像</button>
+    <input type="text" style="width: 400px;" class="img-url">
     <input type="checkbox" class="switch">视口缩放</input>
     <div style="width: 800px;margin-top: 40px;margin-left: 50px;" id="file-clip">
     </div>
@@ -23,6 +24,10 @@
         /* 是否缩放（默认原图尺寸） */
         let zoom = false
 
+        function getimg() {
+            return document.querySelector('.img-url').value
+        }
+
         /* 设置缩放 */
         document.querySelector('.switch').addEventListener('change', (e) => {
             zoom = e.target.checked
@@ -31,10 +36,7 @@
         /* 加载网络资源 */
         document.querySelector('.show').addEventListener('click', function () {
             onload([
-                "http://101.34.62.75:6005/img/0001.webp",
-                "http://101.34.62.75:6005/img/0002.jpg",
-                "http://101.34.62.75:6005/img/0003.jpg",
-                "http://101.34.62.75:6005/img/0004.webp",
+                getimg(),
             ], null)
         })
 
@@ -44,7 +46,7 @@
             onload(Files, true)
         })
 
-   
+
         /* 触发 */
         function onload(Files, isFile) {
             const clip = new Clip({ el: '#file-clip', Files, isFile, zoom })
